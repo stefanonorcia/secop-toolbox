@@ -1,8 +1,7 @@
+import sys
 import scapy.all as scapy
 
-
-def arp(self, ip):
-    self.ip = ip
+def arp(ip):
     print(ip)
     arp_r = scapy.ARP(pdst=ip)
     br = scapy.Ether(dst='ff:ff:ff:ff:ff:ff')
@@ -16,5 +15,4 @@ def arp(self, ip):
         print('-' * 37)
 
 
-ips = input("Inserisci la subnet: ")
-arp(ips)  # call the method
+arp(sys.argv[1])  # call the method
