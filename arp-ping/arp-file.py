@@ -1,6 +1,7 @@
 import sys
 import scapy.all as scapy
 
+
 def arp(ip):
     print(ip)
     arp_r = scapy.ARP(pdst=ip)
