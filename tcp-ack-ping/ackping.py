@@ -1,8 +1,10 @@
+import sys
+import scapy.all as scapy
+
 def tcp_ping(host, port):
     ''' TCP Ping '''
-    ans, unans = sr(IP(dst=host)/TCP(dport=port, flags="S"))
-# ans, unans = sr(IP(dst='192.168.56.99-105') / TCP(dport=80, flags='A'))
-    ans.summary(lambda(s, r): r.sprintf("%IP.src% is alive"))
-# ans.summary(lambda(s, r): r.sprintf('{IP: %IP.src% is alive}'))
+    ans, unans = scapy.sr(scapy.IP(dst=host) / scapy.TCP(dport=port, flags="S"), timeout=0.1)
+    for snd, rcv in ans:
+        rcv.sprintf(r"%Ether.src% & %ARP.psrc%\\")
 
-
+tcp_ping(sys.argv[1], int(sys.argv[2]))
